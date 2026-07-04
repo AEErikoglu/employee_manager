@@ -26,6 +26,15 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="AppBackground">#0B1B32</Color>
+    <Color x:Key="AppFrame">#0D1E4C</Color>
+    <Color x:Key="AppSurface">#26415E</Color>
+    <Color x:Key="AppAccent">#C48CB3</Color>
+    <Color x:Key="AppSecondaryText">#83A6CE</Color>
+    <Color x:Key="AppForeground">#E5C9D7</Color>
+    <Color x:Key="ButtonNormal">#A8C8F0</Color>
+    <Color x:Key="ButtonSubmitted">#3EC47A</Color>
+    <Color x:Key="ButtonShadow">#80E8A8D0</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
@@ -41,4 +50,10 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackground}"/>
+    <SolidColorBrush x:Key="AppFrameBrush" Color="{StaticResource AppFrame}"/>
+    <SolidColorBrush x:Key="AppSurfaceBrush" Color="{StaticResource AppSurface}"/>
+    <SolidColorBrush x:Key="AppAccentBrush" Color="{StaticResource AppAccent}"/>
+    <SolidColorBrush x:Key="AppSecondaryTextBrush" Color="{StaticResource AppSecondaryText}"/>
+    <SolidColorBrush x:Key="AppForegroundBrush" Color="{StaticResource AppForeground}"/>
 </ResourceDictionary>
