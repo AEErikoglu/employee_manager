@@ -7,4 +7,12 @@
     <UserSecretsId>6e704da7-d757-4df0-b054-7bdd9e006d40</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
+  </ItemGroup>
+
 </Project>
