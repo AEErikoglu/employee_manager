@@ -9,6 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EmployeeManagerDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IAppUserService, AppUserService>();
+builder.Services.AddScoped<IWorkplaceMemberService, WorkplaceMemberService>();
+builder.Services.AddScoped<IInvitationService, InvitationService>();
+builder.Services.AddScoped<IAvailabilitySlotService, AvailabilitySlotService>();
+builder.Services.AddScoped<IShiftService, ShiftService>();
+builder.Services.AddScoped<IWorkLogService, WorkLogService>();
 builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 builder.Services.AddOpenApi();
 
@@ -21,6 +27,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapGet("/", () => "Hello World!");
+app.MapAppUserEndpoints();
+app.MapWorkplaceMemberEndpoints();
+app.MapInvitationEndpoints();
+app.MapAvailabilitySlotEndpoints();
+app.MapShiftEndpoints();
+app.MapWorkLogEndpoints();
 app.MapWorkplaceEndpoints();
 
 app.Run();
