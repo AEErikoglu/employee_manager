@@ -23,4 +23,6 @@ public class Shift
     public WorkplaceMember WorkplaceMember { get; set; } = null!;
 
     public WorkplaceMember AssignedByMember { get; set; } = null!;
+
+    public WorkLog? WorkLog { get; set; }
 }

@@ -25,4 +25,6 @@ public class WorkplaceMember
     public ICollection<Shift> ReceivedShifts { get; set; } = [];
 
     public ICollection<Shift> AssignedShifts { get; set; } = [];
+
+    public ICollection<WorkLog> RecordedWorkLogs { get; set; } = [];
 }

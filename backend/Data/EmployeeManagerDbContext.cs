@@ -16,6 +16,8 @@ public class EmployeeManagerDbContext(DbContextOptions<EmployeeManagerDbContext>
 
     public DbSet<Shift> Shifts => Set<Shift>();
 
+    public DbSet<WorkLog> WorkLogs => Set<WorkLog>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ConfigureAppUser(modelBuilder.Entity<AppUser>());
@@ -24,6 +26,7 @@ public class EmployeeManagerDbContext(DbContextOptions<EmployeeManagerDbContext>
         ConfigureInvitation(modelBuilder.Entity<Invitation>());
         ConfigureAvailabilitySlot(modelBuilder.Entity<AvailabilitySlot>());
         ConfigureShift(modelBuilder.Entity<Shift>());
+        ConfigureWorkLog(modelBuilder.Entity<WorkLog>());
     }
 
     private static void ConfigureAppUser(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<AppUser> entity)
@@ -194,5 +197,38 @@ public class EmployeeManagerDbContext(DbContextOptions<EmployeeManagerDbContext>
             .HasForeignKey(x => x.AssignedByMemberId)
             .OnDelete(DeleteBehavior.Restrict)
             .HasConstraintName("fk_shifts_assigned_by_member");
+    }
+
+    private static void ConfigureWorkLog(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<WorkLog> entity)
+    {
+        entity.ToTable("work_logs", tableBuilder =>
+        {
+            tableBuilder.HasCheckConstraint("ck_work_logs_actual_time", "actual_start_time IS NULL OR actual_end_time IS NULL OR actual_start_time < actual_end_time");
+            tableBuilder.HasCheckConstraint("ck_work_logs_status", "status IN ('Completed', 'PartiallyWorked', 'Absent', 'Cancelled')");
+        });
+
+        entity.HasKey(x => x.Id);
+        entity.Property(x => x.Id).HasColumnName("id");
+        entity.Property(x => x.ShiftId).HasColumnName("shift_id");
+        entity.Property(x => x.ActualStartTime).HasColumnName("actual_start_time");
+        entity.Property(x => x.ActualEndTime).HasColumnName("actual_end_time");
+        entity.Property(x => x.Status).HasColumnName("status").HasConversion<string>().HasDefaultValue(WorkLogStatus.Completed).IsRequired();
+        entity.Property(x => x.Note).HasColumnName("note");
+        entity.Property(x => x.RecordedByMemberId).HasColumnName("recorded_by_member_id");
+        entity.Property(x => x.RecordedAt).HasColumnName("recorded_at").HasColumnType("timestamp with time zone").HasDefaultValueSql("now()");
+
+        entity.HasIndex(x => x.ShiftId).IsUnique();
+
+        entity.HasOne(x => x.Shift)
+            .WithOne(x => x.WorkLog)
+            .HasForeignKey<WorkLog>(x => x.ShiftId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("fk_work_logs_shift");
+
+        entity.HasOne(x => x.RecordedByMember)
+            .WithMany(x => x.RecordedWorkLogs)
+            .HasForeignKey(x => x.RecordedByMemberId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasConstraintName("fk_work_logs_recorded_by_member");
     }
 }
