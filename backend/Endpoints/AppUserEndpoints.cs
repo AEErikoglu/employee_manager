@@ -14,7 +14,8 @@ public static class AppUserEndpoints
     public static IEndpointRouteBuilder MapAppUserEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/app-users")
-            .WithTags("AppUsers");
+            .WithTags("AppUsers")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllAppUsers");

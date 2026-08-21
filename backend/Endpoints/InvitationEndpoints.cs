@@ -14,7 +14,8 @@ public static class InvitationEndpoints
     public static IEndpointRouteBuilder MapInvitationEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/invitations")
-            .WithTags("Invitations");
+            .WithTags("Invitations")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllInvitations");

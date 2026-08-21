@@ -14,7 +14,8 @@ public static class WorkLogEndpoints
     public static IEndpointRouteBuilder MapWorkLogEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/work-logs")
-            .WithTags("WorkLogs");
+            .WithTags("WorkLogs")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllWorkLogs");

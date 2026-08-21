@@ -14,7 +14,8 @@ public static class WorkplaceMemberEndpoints
     public static IEndpointRouteBuilder MapWorkplaceMemberEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/workplace-members")
-            .WithTags("WorkplaceMembers");
+            .WithTags("WorkplaceMembers")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllWorkplaceMembers");

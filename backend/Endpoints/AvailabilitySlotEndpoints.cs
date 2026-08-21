@@ -14,7 +14,8 @@ public static class AvailabilitySlotEndpoints
     public static IEndpointRouteBuilder MapAvailabilitySlotEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/availability-slots")
-            .WithTags("AvailabilitySlots");
+            .WithTags("AvailabilitySlots")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllAvailabilitySlots");

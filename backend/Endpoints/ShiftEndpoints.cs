@@ -14,7 +14,8 @@ public static class ShiftEndpoints
     public static IEndpointRouteBuilder MapShiftEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/shifts")
-            .WithTags("Shifts");
+            .WithTags("Shifts")
+            .RequireAuthorization();
 
         group.MapGet("/", GetAllAsync)
             .WithName("GetAllShifts");
