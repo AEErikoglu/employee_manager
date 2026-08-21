@@ -52,6 +52,7 @@ builder.Services.AddScoped<IAvailabilitySlotService, AvailabilitySlotService>();
 builder.Services.AddScoped<IShiftService, ShiftService>();
 builder.Services.AddScoped<IWorkLogService, WorkLogService>();
 builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
+builder.Services.AddScoped<IWorkspaceDashboardService, WorkspaceDashboardService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -74,5 +75,6 @@ app.MapAvailabilitySlotEndpoints();
 app.MapShiftEndpoints();
 app.MapWorkLogEndpoints();
 app.MapWorkplaceEndpoints();
+app.MapDashboardEndpoints();
 
 app.Run();
